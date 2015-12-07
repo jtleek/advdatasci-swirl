@@ -1,0 +1,7 @@
+---
+output: html_document
+---
+
+## A little genetics background
+
+You have one copy of each allele ( copies of a gene) from your mother and one from your father. In a randomly mating population if there are two alleles $A$ and $B$ and the frequency of allele $A$ is $p$ then in the population a random person's genotypes have probabilities $p^2$ for $AA$, $2pq$ for $AB$, and $q^2$ for $BB$.
