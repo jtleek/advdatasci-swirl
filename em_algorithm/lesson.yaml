@@ -1,5 +1,5 @@
 - Class: meta
-  Course: advdatasci
+  Course: advdatasci-swirl
   Lesson: EM Algorithm
   Author: Jeff Leek
   Type: Standard
@@ -8,12 +8,5 @@
 
 - Class: text
   Output: "Welcome to the swirl lesson on the EM algorithm. This lesson is going to give you some practice on 
-  working with the EM algorithm."
-
-
-- Class: figure
-  Output: First a little genetics background
-  Figure: hw.R
-  FigureType: new
-  
+  working with the EM algorithm. The goal is to make it easier for you to "
 
