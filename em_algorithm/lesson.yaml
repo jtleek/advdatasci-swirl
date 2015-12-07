@@ -1,0 +1,13 @@
+- Class: meta
+  Course: advdatasci
+  Lesson: EM Algorithm
+  Author: Jeff Leek
+  Type: Standard
+  Organization: JHU DSL + JHU Biostats
+  Version: 2.3.1
+
+- Class: text
+  Output: "Welcome to the swirl lesson on the EM algorithm. This lesson is going to give you some practice on 
+  working with the EM algorithm. The goal is to make it easier for you to "
+
+
