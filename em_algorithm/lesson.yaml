@@ -10,3 +10,8 @@
   Output: "Welcome to the swirl lesson on the EM algorithm. This lesson is going to give you some practice on 
   working with the EM algorithm. The goal is to make it easier for you to "
 
+
+- Class: figure
+  Output: Now for a little genetics primer. 
+  Figure: hw.R
+  FigureType: new
