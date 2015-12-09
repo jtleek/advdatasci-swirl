@@ -1,0 +1,46 @@
+---
+output: html_document
+---
+
+## EM algorithm background - normal means
+
+Here we want to estimate two normal means and we know that there are only 2. This doesn't always happen and it makes it harder to estimate latent cases when you don't know the number of means. But here we do. The likelihood is hard to maximize if we don't know which Normal the data come from. It looks like this:
+
+$$ \ell(\mu_1,\mu_2 | x_i) = \log\left[\frac{\alpha}{\sqrt{2}}\exp\left\{-1/2 (x_i - \mu_1)^2\right\} + \frac{\alpha}{\sqrt{2}}\exp\left\{-1/2 (x_i - \mu_2)^2\right\}\right]$$
+
+The problem is there are sums inside the log terms and so the derivative is nasty. 
+
+Instead we can introduce a $z$ indicator where $z_i = 1$ if you are from the $N(\mu_1,1)$ and $z_i =0$ if you are from the $N(\mu_2,1)$. Now the likelihood is easier:
+
+$$\ell(\mu_1,\mu_2 | x_i) = \log\left[\frac{\alpha}{\sqrt{2}}\exp\left\{-1/2 (x_i - \mu_1)^2\right\}^{z_i} \times  \frac{\alpha}{\sqrt{2}}\exp\left\{-1/2 (x_i - \mu_2)^2\right\}^{1-z_i}\right]$$
+
+Now there aren't any sums inside the logs and when you take the log, everything is nice and linear. 
+
+$$\ell(\mu_1,\mu_2 | x_i, z_i) \propto  z_i \log(\alpha) + (1-z_i)log(1-\alpha)$$
+$$ -1/2 z_i (x_i - \mu_1)^2 - 1/2 (1-z_i) (x_i - \mu_2)^2$$
+
+
+The EM algorithm takes the expectation of this log likelihood conditioned on the observed data $x_i$. This is:
+
+$$E\left[\ell(\mu_1,\mu_2 | x_i, z_i) | x_i\right]$$
+
+It turns out the expectation here is linear in $z_i$ so we only need the expectation of that variable. The E-step and M-steps are then the following. 
+
+### E-step
+
+$$E[z_i | x_i, \mu_1,\mu_2] = \frac{Pr(x_i | z_i = 1) Pr(z_i = 1)}{Pr(x_i | z_i = 1) Pr(z_i = 1) + Pr(x_i | z_i = 0) Pr(z_i = 0)}$$
+
+which we can write down more explicitly since we know $\alpha$ is the fraction to each normal and the data are Normal. 
+
+$$E[z_i | x_i, \mu_1,\mu_2]  = \frac{\alpha \phi(x_i | \mu_1)}{\alpha \phi(x_i | \mu_1) + (1-\alpha) \phi(x_i | \mu_2)}$$
+
+
+## M-step
+
+We now need to maximize the likelihood for $\mu_1,\mu_2$ and $\alpha$. I'll spare you the math but basically it boils down to
+
+$$\hat{\alpha} = \frac{\sum z_i}{n}$$
+$$\hat{\mu}_1 = \frac{\sum z_i x_i}{\sum z_i}$$
+$$\hat{\mu}_2 = \frac{\sum (1-z_i) x_i}{\sum (1-z_i)}$$
+
+Now let's go back to R and see how we do this in practice. 

@@ -7,25 +7,158 @@
   Version: 2.3.1
 
 - Class: text
-  Output: Welcome to the swirl lesson on the EM algorithm. This lesson is going to give you some practice on 
-  working with the EM algorithm. The goal is to make it easier for you to learn about this stuff. 
+  Output: "Welcome to the swirl lesson on the EM algorithm. This lesson is going to give you some practice on 
+  working with the EM algorithm. The goal is to teach you a little about the algorithm and to show you at least one 
+  non-standard example. We are going to start with the most common example you see in classes."
+
+- Class: cmd_question
+  Output: Let's start by setting the seed. Use the set.seed() function and set the seed to 1234
+  CorrectAnswer: set.seed(1234)
+  AnswerTests: omnitest(correctExpr='set.seed(1234)')
+  Hint: Hint - try set.seed(1234)
+
+
+- Class: cmd_question
+  Output: Now let's simulate some data that we will use to try out our example.  Generate a mean vector of length 500 with 250 0s and 250 3s. This will be our mean vector. Call it mu.
+  CorrectAnswer: "mu = rep(c(0,3),each=250)"
+  AnswerTests: omnitest(correctExpr='mu = rep(c(0,3),each=250)')
+  Hint: Hint - try typing mu <- rep(c(0,3),each=250)
+
+- Class: cmd_question
+  Output: Using that mean vector create a vector of normal data with those means called y. 
+  CorrectAnswer: "y = rnorm(500,mean=mu)"
+  AnswerTests: omnitest(correctExpr='y = rnorm(500,mean=mu)')
+  Hint: Hint - try typing y = rnorm(500,mean=mu)
+  
+  
+- Class: cmd_question
+  Output: Now make a density plot to see if the distribution looks bimodal
+  CorrectAnswer: "plot(density(y))"
+  AnswerTests: omnitest(correctExpr='plot(density(y))')
+  Hint: Hint - try typing plot(density(y))
+
+- Class: figure
+  Output: "Now read a little about the EM algorithm for this case in the Rstudio viewer or in the browser and then return here. If you are in Rstudio you probably have to click on the viewer tab."
+  Figure: em.R
+  FigureType: new
+
+
+
+- Class: cmd_question
+  Output: Initialize your parameters with some guesses. Set mu1 to be one
+  CorrectAnswer: "mu1=1"
+  AnswerTests: omnitest(correctExpr='mu1=1')
+  Hint: Hint - try typing mu1=1
+  
+- Class: cmd_question
+  Output: Initialize your parameters with some guesses. Set mu2 to be seven
+  CorrectAnswer: "mu2=7"
+  AnswerTests: omnitest(correctExpr='mu2=7')
+  Hint: Hint - try typing mu2=7
+  
+- Class: cmd_question
+  Output: Initialize your parameters with some guesses. Set alpha to be 0.75
+  CorrectAnswer: "alpha=0.75"
+  AnswerTests: omnitest(correctExpr='alpha=0.75')
+  Hint: Hint - try typing alpha=0.75
+  
+- Class: cmd_question
+  Output: Now we are going to do the E-step. Recall that we need to replace z with its expected value. Define a variable z and use dnorm to calculate the expected value.
+  CorrectAnswer: "z = (dnorm(y,mean=mu1)*alpha)/(dnorm(y,mean=mu1)*alpha + (dnorm(y,mean=mu2)*(1-alpha)))"
+  AnswerTests: omnitest(correctExpr='z = (dnorm(y,mean=mu1)*alpha)/(dnorm(y,mean=mu1)*alpha + (dnorm(y,mean=mu2)*(1-alpha)))')
+  Hint: Hint - try typing z = (dnorm(y,mean=mu1)*alpha)/(dnorm(y,mean=mu1)*alpha + (dnorm(y,mean=mu2)*(1-alpha)))
+ 
+ 
+- Class: cmd_question
+  Output: Plot y versus z and observe where the probability switches between one normal and the other. 
+  CorrectAnswer: "plot(y,z)"
+  AnswerTests: omnitest(correctExpr='plot(y,z)')
+  Hint: Hint - try typing plot(y,z)
+
+- Class: cmd_question
+  Output: Now use the formulae to get new estimates for mu1,mu2, and alpha. If you need help look in the Viewer/webpage with the EM algorithm description. Start with mu1 
+  CorrectAnswer: "mu1 = sum(z*y)/sum(z)"
+  AnswerTests: omnitest(correctExpr='mu1 = sum(z*y)/sum(z)')
+  Hint: Hint - try typing mu1 = sum(z*y)/sum(z)
+
+
+- Class: cmd_question
+  Output: Now mu2
+  CorrectAnswer: "mu2 = sum((1-z)*y)/sum((1-z))"
+  AnswerTests: omnitest(correctExpr='mu2 = sum((1-z)*y)/sum((1-z))')
+  Hint: Hint - try typing mu2 = sum((1-z)*y)/sum((1-z))
+
+- Class: cmd_question
+  Output: Now alpha
+  CorrectAnswer: "alpha = mean(z)"
+  AnswerTests: omnitest(correctExpr='alpha = mean(z)')
+  Hint: Hint - try typing alpha = mean(z)
+
+
+- Class: cmd_question
+  Output: Look at the values of mu1, mu2, and alpha and see if they are close to the right values
+  CorrectAnswer: "c(mu1,mu2,alpha)"
+  AnswerTests: omnitest(correctExpr='c(mu1,mu2,alpha)')
+  Hint: Hint - try typing c(mu1,mu2,alpha)
+
 
 
 - Class: figure
-  Output: Now for a little genetics primer. Read about it in the Rstudio viewer or in 
-  the browser and then return here. 
+  Output: "If I iterate a large number of times here is what I get"
+  Figure: em-end.R
+  FigureType: new
+
+
+- Class: text
+  Output: "You can see that all the parameters converged. But if I instead make the means very close to each other, say instead of 0 and 3 I use 0 and 0.05 this happens"
+
+- Class: figure
+  Output: "If I iterate a large number of times here is what I get"
+  Figure: em-end-close.R
+  FigureType: new
+
+- Class: text
+  Output: "In this case the likelihood surface was very flat even though we introduced the z_i indicator and so the em algorithm converges to a local minimum."
+
+- Class: text
+  Output: "Now let's consider a slightly more complicated example from genetics."
+
+
+- Class: figure
+  Output: "Let's start with a little genetics primer. Read about it in the Rstudio viewer or in 
+  the browser and then return here."
   Figure: hw.R
   FigureType: new
 
 
 - Class: video
-  Output: Would you like to read more about Hardy-Weinberg equilibrium?
+  Output: "Would you like to read more about Hardy-Weinberg equilibrium?"
   VideoLink: https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle
 
+
 - Class: mult_question
-  Output: ask the multiple choice question here
-  AnswerChoices: ANS;2;3
-  CorrectAnswer: ANS
-  AnswerTests: omnitest(correctVal= 'ANS')
-  Hint: hint
+  Output: Your genotype is either AA, AB, or BB. What is the distribution of genotypes in a randomly mating population?
+  AnswerChoices: multinomial; binomial; normal; poisson
+  CorrectAnswer: multinomial
+  AnswerTests: omnitest(correctVal= 'multinomial')
+  Hint: You get one letter from your mom and one from your dad, independently and randomly. 
+  
+- Class: figure
+  Output: "Ok now a little background on blood types. Read it in the viewer/browser and return here."
+  Figure: bt.R
+  FigureType: new
+
+- Class: video
+  Output: "Would you like to read more about blood types?"
+  VideoLink: https://en.wikipedia.org/wiki/ABO_blood_group_system
+
+- Class: mult_question
+  Output: "What are the genotypes you can have and have blood type A."
+  AnswerChoices: AA and AO;AA;AO and BO;OO
+  CorrectAnswer: AA and AO
+  AnswerTests: omnitest(correctVal='AA and AO')
+  Hint: It has to have one A and no Bs
+
+
+
 
