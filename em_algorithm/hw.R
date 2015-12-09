@@ -1,4 +1,4 @@
-path <- .path_to_file("advdatasci", "em_algorithm", "hw.Rmd")
+path <- .path_to_file("advdatasci-swirl", "em_algorithm", "hw.Rmd")
 
 tf <- tempfile()
 dir.create(tf)
