@@ -22,7 +22,7 @@
   Output: Now let's simulate some data that we will use to try out our example.  Generate a mean vector of length 500 with 250 0s and 250 3s. This will be our mean vector. Call it mu.
   CorrectAnswer: "mu = rep(c(0,3),each=250)"
   AnswerTests: omnitest(correctExpr='mu = rep(c(0,3),each=250)')
-  Hint: Hint - try typing mu <- rep(c(0,3),each=250)
+  Hint: Hint - try typing mu = rep(c(0,3),each=250)
 
 - Class: cmd_question
   Output: Using that mean vector create a vector of normal data with those means called y. 
