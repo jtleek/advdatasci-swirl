@@ -7,11 +7,25 @@
   Version: 2.3.1
 
 - Class: text
-  Output: "Welcome to the swirl lesson on the EM algorithm. This lesson is going to give you some practice on 
-  working with the EM algorithm. The goal is to make it easier for you to "
+  Output: Welcome to the swirl lesson on the EM algorithm. This lesson is going to give you some practice on 
+  working with the EM algorithm. The goal is to make it easier for you to learn about this stuff. 
 
 
 - Class: figure
-  Output: Now for a little genetics primer. 
+  Output: Now for a little genetics primer. Read about it in the Rstudio viewer or in 
+  the browser and then return here. 
   Figure: hw.R
   FigureType: new
+
+
+- Class: video
+  Output: Would you like to read more about Hardy-Weinberg equilibrium?
+  VideoLink: https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle
+
+- Class: mult_question
+  Output: ask the multiple choice question here
+  AnswerChoices: ANS;2;3
+  CorrectAnswer: ANS
+  AnswerTests: omnitest(correctVal= 'ANS')
+  Hint: hint
+
